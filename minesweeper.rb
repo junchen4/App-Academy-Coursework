@@ -41,7 +41,6 @@ class Board
 
 
 
-
   def generate_bombs
     @bomb_positions = []
 
@@ -86,6 +85,23 @@ class Board
   #   @rows[x][y] = mark
   # end
 
+  def display
+    @rows.each_with_index do |row,row_idx|
+      row.each_with_index do |col,col_idx|
+          if !self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).flagged
+            print "*"
+          elsif !self.[]([row_idx,col_idx]).revealed && self.[]([row_idx,col_idx]).flagged
+            print "F"
+          elsif self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).bomb
+            print "#{self.[]([row_idx,col_idx]).neighbors_bomb_count}"
+          else
+            print "B"
+          end
+      end
+      puts
+    end
+
+  end
 
 end
 
@@ -110,7 +126,7 @@ attr_reader :board, :position
     @revealed = true
     if self.neighbors_bomb_count == 0
       self.neighbors.each do |neighbor|
-        neighbor.reveal unless neighbor.revealed
+        neighbor.reveal unless (neighbor.revealed || neighbor.flagged)
       end
     end
     @revealed
@@ -154,6 +170,12 @@ attr_reader :board, :position
     end
     bomb_counter
   end
+
+
+end
+
+class Player
+
 
 
 end
