@@ -1,33 +1,21 @@
 class Board
   attr_accessor :rows
 
-  def self.start_grid
+  def start_grid
+    generate_bombs
+
     Array.new(9) do |row|
       Array.new(9) do |col|
-        Tile.new(false,false,false,[row,col])
+        if @bomb_positions.include?([row,col])
+          Tile.new(false,true,false,[row,col])
+        else
+          Tile.new(false,false,false,[row,col])
+        end
       end
     end
   end
 
-  # def start_grid
-  #   generate_bombs
-  #   @rows = self.class.blank_grid
-  #
-  #   @rows.each_with_index do |row, index1|
-  #
-  #     row.each_with_index do |space, index2|
-  #
-  #       if @bomb_positions.include?([index1, index2])
-  #         self.[]=([index1,index2],Tile.new(false, true, false, [index1, index2]))
-  #       else
-  #         self.[]=([index1,index2],Tile.new(false, false, false, [index1, index2]))
-  #       end
-  #     end
-  #   end
-  #
-  #   @rows
-  #
-  # end
+
 
   def generate_bombs
     @bomb_positions = []
@@ -43,17 +31,18 @@ class Board
     @bomb_positions
   end
 
-  def initialize(rows = self.class.start_grid) ###might need to change to play grid
+  def initialize(rows = self.start_grid) ###might need to change to play grid
     @rows = rows
   end
 
 
-  def place_bombs
-    #generate_bombs
-    @bomb_positions.each do |position|
-      self.[]=(position, "B")
-    end
-  end
+
+  # def place_bombs
+  #   #generate_bombs
+  #   @bomb_positions.each do |position|
+  #     self.[]=(position, "B")
+  #   end
+  # end
 
   def empty?(pos)
     self[pos].nil?
