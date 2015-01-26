@@ -1,7 +1,28 @@
 class Board
+  attr_accessor :rows
 
   def self.blank_grid
     Array.new(9) { Array.new(9) }
+
+  end
+
+  def start_grid
+    generate_bombs
+    @rows = self.class.blank_grid
+
+    @rows.each_with_index do |row, index1|
+
+      row.each_with_index do |space, index2|
+
+        if @bomb_positions.include?([index1, index2])
+          self.[]=([index1,index2],Tile.new(false, true, false, [index1, index2]))
+        else
+          self.[]=([index1,index2],Tile.new(false, false, false, [index1, index2]))
+        end
+      end
+    end
+
+    @rows
 
   end
 
@@ -19,17 +40,13 @@ class Board
     @bomb_positions
   end
 
-
-
-
-  def initialize(rows = self.class.blank_grid)
+  def initialize(rows = self.start_grid) ###might need to change to play grid
     @rows = rows
-
   end
 
 
   def place_bombs
-    generate_bombs
+    #generate_bombs
     @bomb_positions.each do |position|
       self.[]=(position, "B")
     end
