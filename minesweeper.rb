@@ -7,9 +7,9 @@ class Board
     Array.new(9) do |row|
       Array.new(9) do |col|
         if @bomb_positions.include?([row,col])
-          Tile.new(false,true,false,[row,col])
+          Tile.new(false,true,false,[row,col],self)
         else
-          Tile.new(false,false,false,[row,col])
+          Tile.new(false,false,false,[row,col],self)
         end
       end
     end
@@ -72,7 +72,8 @@ class Tile
 
 attr_accessor :revealed, :bomb, :flagged, :position
 
-  def initialize(revealed, bomb, flagged, position)
+  def initialize(revealed, bomb, flagged, position, board)
+    @board = board
     @revealed = revealed
     @bomb = bomb
     @flagged = flagged
@@ -83,9 +84,24 @@ attr_accessor :revealed, :bomb, :flagged, :position
     @revealed = true
   end
 
-  def neighbors
-    x, y = position[0], position[1]
+  def neighbor_coordinates
+    x, y = self.position[0], self.position[1]
+    neighbor_coordinates = []
+    row = [x-1, x, x+1]
+    col = [y-1, y, y+1]
 
+    row.each do |el1|
+      col.each do |el2|
+        if el1.between?(0,7) && el2.between?(0,7) && (el1 == x && el2 == y)
+          neighbor_coordinates << [el1,el2]
+        end
+      end
+    end
+    neighbor_coordinates
+  end
+
+  def neighbors
+    
 
   end
 
