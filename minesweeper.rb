@@ -108,6 +108,12 @@ attr_reader :board, :position
 
   def reveal
     @revealed = true
+    if self.neighbors_bomb_count == 0
+      self.neighbors.each do |neighbor|
+        neighbor.reveal unless neighbor.revealed
+      end
+    end
+    @revealed
   end
 
   def flag
