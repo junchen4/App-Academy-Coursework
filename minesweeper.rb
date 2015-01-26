@@ -16,6 +16,31 @@ class Board
   end
 
 
+  def lose?
+    @rows.each_with_index do |row,row_idx|
+      row.each_with_index do |col, col_idx|
+          if self.[]([row_idx,col_idx]).bomb && self.[]([row_idx,col_idx]).revealed
+            return true
+          end
+      end
+    end
+    false
+  end
+
+  def win?
+    #all bombs flagged, everything else revealed
+    @rows.each_with_index do |row,row_idx|
+      row.each_with_index do |col,col_idx|
+        if !(self.[]([row_idx,col_idx]).bomb && self.[]([row_idx,col_idx]).flagged) || !(self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).bomb)
+          return false
+        end
+      end
+    end
+    true
+  end
+
+
+
 
   def generate_bombs
     @bomb_positions = []
@@ -44,22 +69,22 @@ class Board
   #   end
   # end
 
-  def empty?(pos)
-    self[pos].nil?
-  end
+  # def empty?(pos)
+  #   self[pos].nil?
+  # end
 
   def [](pos)
     x, y = pos[0], pos[1]
     @rows[x][y]
   end
 
-
-  def []=(pos, mark)
-    raise "mark already placed there!" unless empty?(pos)
-
-    x, y = pos[0], pos[1]
-    @rows[x][y] = mark
-  end
+  #
+  # def []=(pos, mark)
+  #   raise "mark already placed there!" unless empty?(pos)
+  #
+  #   x, y = pos[0], pos[1]
+  #   @rows[x][y] = mark
+  # end
 
 
 end
