@@ -21,6 +21,8 @@ class Board
   # end
 
 
+
+
 end
 
 
@@ -29,11 +31,11 @@ end
 
 class Tile
 
-  def initialize(revealed = false, bomb, flagged = false)
+  def initialize(revealed = false, bomb, flagged = false, position)
     @revealed = revealed?
-    @bomb =
-    @flagged =
-
+    @bomb = bomb
+    @flagged = flagged
+    @tile_position = position
   end
 
 
