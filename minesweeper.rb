@@ -101,12 +101,22 @@ attr_accessor :revealed, :bomb, :flagged, :position
   end
 
   def neighbors
-    
+    neighbors = []
+    self.neighbor_coordinates.each do |position|
+      neighbors << @board.[](position)
+    end
+    neighbors
 
   end
 
   def neighbors_bomb_count
-
+    bomb_counter = 0
+    neighbors.each do |neighbor|
+      if neighbor.bomb
+        bomb_counter += 1
+      end
+    end
+    bomb_counter
   end
 
 
