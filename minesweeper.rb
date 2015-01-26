@@ -29,14 +29,26 @@ class Board
 
   def win?
     #all bombs flagged, everything else revealed
+    flags = 0
+    reveals = 0
     @rows.each_with_index do |row,row_idx|
       row.each_with_index do |col,col_idx|
-        if !(self.[]([row_idx,col_idx]).bomb && self.[]([row_idx,col_idx]).flagged) || !(self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).bomb)
-          return false
+        if self[[row_idx,col_idx]].flagged
+          flags += 1
+        elsif self[[row_idx,col_idx]].revealed
+          reveals += 1
         end
+
+        # if !(self[[row_idx,col_idx]].bomb && self[[row_idx,col_idx]].flagged) || !(self[[row_idx,col_idx]].revealed && !self[[row_idx,col_idx]].bomb)
+        #   return false
+        # end
       end
     end
-    true
+    if flags == 10 && reveals == 71
+      return true
+    else
+      return false
+    end
   end
 
 
@@ -86,24 +98,44 @@ class Board
   # end
 
   def display
-    print "   0 1 2 3 4 5 6 7 8"
-    puts
-    puts
-    @rows.each_with_index do |row,row_idx|
-      print "#{row_idx}  "
-      row.each_with_index do |col,col_idx|
-          if !self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).flagged
-            print "* "
-          elsif !self.[]([row_idx,col_idx]).revealed && self.[]([row_idx,col_idx]).flagged
-            print "F "
-          elsif self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).bomb
-            print "#{self.[]([row_idx,col_idx]).neighbors_bomb_count}"
-          else
-            print "B "
-          end
-      end
+    if !self.lose?
+      print "   0 1 2 3 4 5 6 7 8"
       puts
-    end
+      puts
+      @rows.each_with_index do |row,row_idx|
+        print "#{row_idx}  "
+        row.each_with_index do |col,col_idx|
+            if !self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).flagged
+              print "* "
+            elsif !self.[]([row_idx,col_idx]).revealed && self.[]([row_idx,col_idx]).flagged
+              print "F "
+            elsif self.[]([row_idx,col_idx]).revealed && !self.[]([row_idx,col_idx]).bomb
+              print "#{self.[]([row_idx,col_idx]).neighbors_bomb_count} "
+            else
+              print "B "
+            end
+        end
+        puts
+      end
+      else
+        print "   0 1 2 3 4 5 6 7 8"
+        puts
+        puts
+        @rows.each_with_index do |row,row_idx|
+          print "#{row_idx}  "
+          row.each_with_index do |col,col_idx|
+            if self[[row_idx,col_idx]].flagged && self[[row_idx,col_idx]].bomb
+              print "b "
+            elsif !self[[row_idx,col_idx]].flagged && self[[row_idx,col_idx]].bomb
+              print "B "
+            elsif !self[[row_idx,col_idx]].bomb
+              print "#{self.[]([row_idx,col_idx]).neighbors_bomb_count} "
+            end
+          end
+          puts
+
+        end
+      end
     nil
   end
 
@@ -175,5 +207,64 @@ attr_reader :board, :position
     bomb_counter
   end
 
+
+end
+
+class Game
+
+  def initialize
+    @board = Board.new
+  end
+
+  def play
+    while(!@board.win? && !@board.lose?)
+      @board.display
+      get_input
+
+      if @choice == "R"
+        @board[[@x_coord,@y_coord]].reveal
+      else
+        @board[[@x_coord,@y_coord]].flag
+      end
+    end
+
+    if @board.win?
+      @board.display
+      puts "You are so smart.............."
+    elsif @board.lose?
+      @board.display
+      puts "Guess you could go back to kindergarten......."
+      # print "   0 1 2 3 4 5 6 7 8"
+      # puts
+      # puts
+      # @rows.each_with_index do |row,row_idx|
+      #   print "#{row_idx}  "
+      #   row.each_with_index do |col,col_idx|
+      #     if @board[[row_idx,col_idx]].flagged && @board[[row_idx,col_idx]].bomb
+      #       print "b "
+      #     elsif !@board[[row_idx,col_idx]].flagged && @board[[row_idx,col_idx]].bomb
+      #       print "B "
+      #     elsif !@board[[row_idx,col_idx]].bomb
+      #       print "#{self.[]([row_idx,col_idx]).neighbors_bomb_count} "
+      #     end
+      #   end
+      #   puts
+      # end
+    end
+
+  end
+
+  def get_input
+    print "Please choose reveal 'R' or flag 'F' "
+    @choice = gets.chomp
+    #if @choice != "R" & @choice != "F"
+
+
+    print "Please choose x-coordinate: "
+    @x_coord = gets.chomp.to_i
+
+    print "Please choose y-coordinate: "
+    @y_coord = gets.chomp.to_i
+  end
 
 end
