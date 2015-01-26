@@ -70,18 +70,23 @@ end
 
 class Tile
 
-attr_accessor :revealed, :bomb, :flagged, :position
+attr_accessor :revealed, :bomb, :flagged
+attr_reader :board, :position
 
   def initialize(revealed, bomb, flagged, position, board)
     @board = board
     @revealed = revealed
     @bomb = bomb
     @flagged = flagged
-    @tile_position = position
+    @position = position
   end
 
   def reveal
     @revealed = true
+  end
+
+  def flag
+    @flagged = true
   end
 
   def neighbor_coordinates
@@ -92,7 +97,7 @@ attr_accessor :revealed, :bomb, :flagged, :position
 
     row.each do |el1|
       col.each do |el2|
-        if el1.between?(0,7) && el2.between?(0,7) && (el1 == x && el2 == y)
+        if el1.between?(0,8) && el2.between?(0,8) && !(el1 == x && el2 == y)
           neighbor_coordinates << [el1,el2]
         end
       end
