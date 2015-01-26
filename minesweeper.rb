@@ -79,7 +79,17 @@ attr_accessor :revealed, :bomb, :flagged, :position
     @tile_position = position
   end
 
-  def reveal(pos)
+  def reveal
+    @revealed = true
+  end
+
+  def neighbors
+    x, y = position[0], position[1]
+
+
+  end
+
+  def neighbors_bomb_count
 
   end
 
