@@ -1,3 +1,5 @@
+require "yaml"
+
 class Board
   attr_accessor :rows
 
@@ -16,12 +18,21 @@ class Board
   end
 
 
+  def tiles
+    @tiles = @rows.flatten
+  end
+
   def lose?
-    @rows.each_with_index do |row,row_idx|
-      row.each_with_index do |col, col_idx|
-          if self.[]([row_idx,col_idx]).bomb && self.[]([row_idx,col_idx]).revealed
-            return true
-          end
+    # @rows.each_with_index do |row,row_idx|
+    #    row.each_with_index do |col, col_idx|
+    #       if self.[]([row_idx,col_idx]).bomb && self.[]([row_idx,col_idx]).revealed
+    #         return true
+    #       end
+    #   end
+    # end
+    @tiles.each do |tile|
+      if tile.bomb && tile.revealed
+        return true
       end
     end
     false
@@ -44,6 +55,7 @@ class Board
         # end
       end
     end
+
     if flags == 10 && reveals == 71
       return true
     else
@@ -69,6 +81,7 @@ class Board
 
   def initialize(rows = self.start_grid) ###might need to change to play grid
     @rows = rows
+    @tiles = @rows.flatten
   end
 
 
@@ -173,9 +186,9 @@ attr_reader :board, :position
   end
 
   def neighbor_coordinates
-    x, y = self.position[0], self.position[1]
+    x, y = self.position
     neighbor_coordinates = []
-    row = [x-1, x, x+1]
+    row = [x - 1, x, x + 1]
     col = [y-1, y, y+1]
 
     row.each do |el1|
@@ -257,14 +270,26 @@ class Game
   def get_input
     print "Please choose reveal 'R' or flag 'F' "
     @choice = gets.chomp
-    #if @choice != "R" & @choice != "F"
-
+    if @choice != "R" && @choice != "F"
+      puts "Not applicable jackass"
+      get_input
+    end
 
     print "Please choose x-coordinate: "
     @x_coord = gets.chomp.to_i
+    if !@x_coord.between?(0,8)
+      puts "Not applicable"
+      get_input
+    end
+
 
     print "Please choose y-coordinate: "
     @y_coord = gets.chomp.to_i
+    if !@y_coord.between?(0,8)
+      puts "Not applicable"
+      get_input
+    end
+
   end
 
 end
