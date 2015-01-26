@@ -8,6 +8,19 @@ class Board
     @rows = rows
   end
 
+  def generate_bombs
+    @bomb_positions = []
+    
+    while @bomb_positions.count < 10
+      p1 = (0..8).to_a.sample
+      p2 = (0..8).to_a.sample
+
+      if !@bomb_positions.include?[p1,p2]
+        @bomb_positions << [p1,p2]
+      end
+    end
+  end
+
   def [](pos)
     x, y = pos[0], pos[1]
     @rows[x][y]
@@ -19,6 +32,10 @@ class Board
   #   x, y = pos[0], pos[1]
   #   @rows[x][y] = mark
   # end
+
+
+
+
 
 
 
@@ -38,6 +55,9 @@ class Tile
     @tile_position = position
   end
 
+  def reveal(pos)
+
+  end
 
 
 end
