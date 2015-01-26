@@ -1,30 +1,33 @@
 class Board
   attr_accessor :rows
 
-  def self.blank_grid
-    Array.new(9) { Array.new(9) }
-
-  end
-
-  def start_grid
-    generate_bombs
-    @rows = self.class.blank_grid
-
-    @rows.each_with_index do |row, index1|
-
-      row.each_with_index do |space, index2|
-
-        if @bomb_positions.include?([index1, index2])
-          self.[]=([index1,index2],Tile.new(false, true, false, [index1, index2]))
-        else
-          self.[]=([index1,index2],Tile.new(false, false, false, [index1, index2]))
-        end
+  def self.start_grid
+    Array.new(9) do |row|
+      Array.new(9) do |col|
+        Tile.new(false,false,false,[row,col])
       end
     end
-
-    @rows
-
   end
+
+  # def start_grid
+  #   generate_bombs
+  #   @rows = self.class.blank_grid
+  #
+  #   @rows.each_with_index do |row, index1|
+  #
+  #     row.each_with_index do |space, index2|
+  #
+  #       if @bomb_positions.include?([index1, index2])
+  #         self.[]=([index1,index2],Tile.new(false, true, false, [index1, index2]))
+  #       else
+  #         self.[]=([index1,index2],Tile.new(false, false, false, [index1, index2]))
+  #       end
+  #     end
+  #   end
+  #
+  #   @rows
+  #
+  # end
 
   def generate_bombs
     @bomb_positions = []
@@ -40,7 +43,7 @@ class Board
     @bomb_positions
   end
 
-  def initialize(rows = self.start_grid) ###might need to change to play grid
+  def initialize(rows = self.class.start_grid) ###might need to change to play grid
     @rows = rows
   end
 
@@ -77,6 +80,8 @@ end
 
 
 class Tile
+
+attr_accessor :revealed, :bomb, :flagged, :position
 
   def initialize(revealed, bomb, flagged, position)
     @revealed = revealed
