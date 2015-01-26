@@ -266,14 +266,31 @@ class Game
     end
 
   end
+  def save_game(name_game)
+    game = self.to_yaml
+    File.open("#{name_game}.yaml","w") do |f|
+      f.puts game
+    end
 
+
+
+    nil
+  end
   def get_input
-    print "Please choose reveal 'R' or flag 'F' "
+    print "Please choose reveal 'R' or flag 'F' or 'S' to save game for later "
     @choice = gets.chomp
-    if @choice != "R" && @choice != "F"
+    if @choice != "R" && @choice != "F" && @choice != "S"
       puts "Not applicable jackass"
       get_input
     end
+    if @choice == "S"
+      puts "Please name your game"
+      save_game(gets.chomp)
+      get_input
+    end
+
+    #Save game here
+
 
     print "Please choose x-coordinate: "
     @x_coord = gets.chomp.to_i
@@ -290,6 +307,21 @@ class Game
       get_input
     end
 
+  end
+
+end
+
+
+if __FILE__ == $PROGRAM_NAME
+  print "Would you like to load a previous game? "
+  if gets.chomp == "yes"
+    print "What is the name of the game? "
+    name = gets.chomp
+    g_load = YAML.load(File.open(name))
+    g_load.play
+  else
+    g = Game.new
+    g.play
   end
 
 end
