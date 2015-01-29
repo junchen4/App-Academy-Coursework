@@ -1,7 +1,0 @@
-class Piece
-
-  def initialize
-    @position = [1,2]
-  end
-
-end
