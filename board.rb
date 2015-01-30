@@ -1,4 +1,3 @@
-#require 'colorize'
 require 'colorize'
 require_relative 'piece'
 
@@ -56,6 +55,26 @@ class Board
     add_piece(start_piece, start_piece.position)
     #self[start_piece.position] = start_piece #Add the now updated start_piece to the board at the right location
   end
+
+  def find_path(start, finish) #returns move_sequence if exists, otherwise returns empty array
+    board_copy = self.dup
+    new_directions = []
+    piece = board_copy[start]
+      piece.move_diffs.keys.each do |direction|
+        if board_copy.valid_move_seq?(start, [direction])
+          board_copy.move_piece(piece.color, start, [direction])
+          updated_position = piece.position
+          return [direction] if updated_position == finish
+          prev_directions = board_copy.find_path(updated_position, finish)
+          prev_directions << direction
+          new_directions = prev_directions
+        else
+          next
+        end
+    end
+    return new_directions
+  end
+
 
   def game_over?
     pieces.select{|piece| piece.color == :red}.empty? || pieces.select{|piece| piece.color == :black}.empty?
