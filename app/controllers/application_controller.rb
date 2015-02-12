@@ -4,15 +4,16 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   helper_method :current_user #makes method available to code in views
+  helper_method :logged_in?
 
   def current_user
     current_user = User.find_by(session_token: session[:session_token])
   end
 
   def logged_in?
-    return true if sessions[:session_token] == current_user.session_token
-    nil
-  end
+    return false if current_user.nil?
+    true
+    end
 
   def log_in_user!(user)
     session[:session_token] = user.reset_session_token!

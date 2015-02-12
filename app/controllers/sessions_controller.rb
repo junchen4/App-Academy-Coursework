@@ -17,8 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user.reset_session_token! #this must come BEFORE next line;
+    #otherwise, current_user will be nil as soon as the session[token] is reset
     session[:session_token] = nil
-    current_user.reset_session_token!
+    redirect_to new_session_url
   end
 
   # def require_user!
