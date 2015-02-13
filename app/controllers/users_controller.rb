@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      log_in(@user)
       redirect_to user_url(@user)
     else
       render :new
@@ -22,15 +23,18 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    render :edit
+
+    if @user.nil? || params[:id] != @user.id
+      #error message can't edit other user
+      redirect_to users_url
+    else
+      render :edit
+    end
   end
 
   def update
-    @user = User.find_by_credentials(params[:user][:user_name],
-                                     params[:user][:password]
-                                    )
-
-    if @user.update(user_params)
+    @user = current_user
+    if @user.update_attributes(user_params)
       redirect_to user_url(@user)
     else
       render :edit
@@ -39,7 +43,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render :show
+
+    if @user.nil? || params[:id] != @user.id
+      #error message can't view other user
+      redirect_to users_url
+    else
+      render :show
+    end
   end
 
   def destroy

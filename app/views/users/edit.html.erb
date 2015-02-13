@@ -1,0 +1,23 @@
+<h1> Edit your name </h1>
+
+<form action="<%= user_url(params[:id]) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="patch">
+
+  <label id="username"> New Name: </label>
+    <input id="username"
+           type="text"
+           name="user[user_name]"
+           value="<%= current_user_name %>">
+  <br>
+
+  <button> Submit Change </button>
+</form>
+
+<br>
+<br>
+<form action="<%= user_url(params[:id]) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="delete">
+  <button> Delete Account </button>
+</form>

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  validates :password, length: {minimum: 6, not_nil: true}
+  validates :password, length: {minimum: 6}, allow_nil: true
   validates :password_digest, :session_token, presence: true
   validates :user_name, presence: true, uniqueness: true
   attr_reader :password
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(username, password)
     user = User.find_by(user_name: username)
-    return nil if @user.nil?
+    return nil if user.nil?
     #check password
     return nil unless user.is_password?(password)
     user
