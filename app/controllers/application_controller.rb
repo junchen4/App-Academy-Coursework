@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
     redirect_to subs_url unless !current_user.nil? && current_user.id == sub.mod_id
   end
 
+  def redirect_if_not_author
+    post = Post.find(params[:id])
+    redirect_to post_url(post) unless !current_user.nil? && current_user.id == post.author_id
+  end
+
   def current_user
     user = User.find_by(session_token: session[:session_token])
     return nil if user.nil?

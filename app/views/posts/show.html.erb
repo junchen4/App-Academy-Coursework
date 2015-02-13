@@ -1,0 +1,15 @@
+<h1><%= @post.title %> on <%= Sub.find(@post.sub_id).title %></h1>
+
+URL: <%= @post.url %>
+<br>
+<br>
+
+Content
+<br>
+<%= @post.content %>
+<br>
+<br>
+
+Author: <%= User.find(@post.author_id).user_name %>
+<br>
+<br>
