@@ -7,9 +7,13 @@
 <body>
 
 <%= yield %>
-
+<br>
+<br>
 </body>
 <footer>
+  <a href="<%= subs_url %>">View Subs</a>
+  <br>
+  <br>
   <% if logged_in? %>
     <form action="<%= session_url %>" method="post">
       <%= auth_token %>

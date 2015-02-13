@@ -1,0 +1,5 @@
+<h1>Edit Sub</h1>
+
+<% unless redirect_if_not_mod(@sub) %>
+<%= render "form", sub: @sub %>
+<% end %>

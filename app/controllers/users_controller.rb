@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
 
-  def index
-    @user = User.all
-    render :index
-  end
 
   def new
     @user = User.new
@@ -26,7 +22,7 @@ class UsersController < ApplicationController
 
     if @user.nil? || params[:id] != @user.id
       #error message can't edit other user
-      redirect_to users_url
+      redirect_to subs_url
     else
       render :edit
     end
@@ -46,7 +42,7 @@ class UsersController < ApplicationController
 
     if @user.nil? || params[:id] != @user.id
       #error message can't view other user
-      redirect_to users_url
+      redirect_to subs_url
     else
       render :show
     end
@@ -56,7 +52,7 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.destroy
-      redirect_to users_url
+      redirect_to subs_url
     else
       redirect_to user_url(@user)
     end

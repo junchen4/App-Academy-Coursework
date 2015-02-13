@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   def destroy
     log_out!
     session[:session_token] = nil
-    redirect_to users_url
+    redirect_to subs_url
   end
 
 end

@@ -1,0 +1,19 @@
+<% redirect_if_not_logged_in %>
+<% action_url = sub.persisted? ? sub_url(params[:id]) : subs_url %>
+<% verb = sub.persisted? ? "patch" : "post" %>
+
+<form action="<%= action_url %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="<%= verb %>">
+
+  <label id="title">Sub Title</label>
+  <input id="title" type="text" name="sub[title]" value="<%= @sub.title %>">
+  <br>
+  <br>
+  <label id="desc">Description</label>
+  <br>
+  <textarea name="sub[description]" id="desc" rows="8" cols="40"><%= @sub.description %></textarea>
+  <br>
+  <br>
+  <button>Submit</button>
+</form>
