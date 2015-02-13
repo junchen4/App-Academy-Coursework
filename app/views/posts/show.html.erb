@@ -1,4 +1,4 @@
-<h1><%= @post.title %> on <%= Sub.find(@post.sub_id).title %></h1>
+<h1><%= @post.title %> </h1>
 
 URL: <%= @post.url %>
 <br>
@@ -13,3 +13,7 @@ Content
 Author: <%= User.find(@post.author_id).user_name %>
 <br>
 <br>
+
+<% if current_user_id == @post.author_id %>
+<a href="<%=edit_post_url(@post)%>"> Edit Post </a>
+<% end %>

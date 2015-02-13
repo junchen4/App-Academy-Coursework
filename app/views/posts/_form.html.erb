@@ -14,12 +14,20 @@
   <br>
   <label id="content">Post Content</label>
   <br>
-  <textarea id="content" name="post[content]" rows="8" cols="40">
-  <%= @post.content %>
-  </textarea>
+  <textarea id="content" name="post[content]" rows="8" cols="40"><%= @post.content %></textarea>
   <br>
-  <label id="sub">Sub</label>
-  <input id ="sub" type="integer" name="post[sub_id]" value="<%= @post.sub_id %>">
+  <br>
+  <strong>Select Sub(s)</strong>
+  <br>
+  <% Sub.all.each do |sub| %>
+    <input id="sub"
+           type="checkbox"
+           name="post[sub_ids][]"
+           value="<%= sub.id %>"
+           <%= "checked" if @post.subs.include?(sub) %>>
+    <label id="sub"><%= sub.title %></label>
+    <br>
+  <% end %>
   <br>
   <button> Submit </button>
 </form>

@@ -25,8 +25,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
-    if @post.update_attributes(post_params)
+    if params[:post][:sub_ids].nil?
+      #add error
+      render :edit
+    elsif @post.update_attributes(post_params)
       redirect_to post_url(@post)
     else
       render :edit
@@ -40,7 +42,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content, :url, :sub_id)
+    params.require(:post).permit(:title, :content, :url, sub_ids: [])
   end
 
 

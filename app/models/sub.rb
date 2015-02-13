@@ -7,5 +7,17 @@ class Sub < ActiveRecord::Base
     class_name: 'User',
     foreign_key: :mod_id
   )
-  
+
+  has_many(
+    :post_subs,
+    class_name: "PostSub",
+    foreign_key: :sub_id
+  )
+
+  has_many(
+    :posts,
+    through: :post_subs,
+    source: :post
+  )
+
 end
