@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   def password=(password)
     #can't just use @password_digest
     self.password_digest = BCrypt::Password.create(password)
+    #Password_digest is a string???
   end
 
   def is_password?(password)
