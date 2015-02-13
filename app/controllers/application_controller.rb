@@ -3,16 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :logged_in?, :current_user_name,
-                :redirect_if_not_logged_in,
-                :redirect_if_not_mod,
                 :current_user_id
 
   def redirect_if_not_logged_in
     redirect_to new_session_url unless logged_in?
   end
 
-  def redirect_if_not_mod(sub)
-    redirect_to subs_url unless current_user.id == sub.mod_id
+  def redirect_if_not_mod
+    sub = Sub.find(params[:id])
+    redirect_to subs_url unless !current_user.nil? && current_user.id == sub.mod_id
   end
 
   def current_user

@@ -1,4 +1,3 @@
-<% redirect_if_not_logged_in %>
 <% action_url = sub.persisted? ? sub_url(params[:id]) : subs_url %>
 <% verb = sub.persisted? ? "patch" : "post" %>
 
