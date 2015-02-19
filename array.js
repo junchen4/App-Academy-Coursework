@@ -25,7 +25,7 @@ var myUniq = function(array) {
 var output = myUniq([1,2,2,4,1,4]);
 console.log(output);
 
-///////////////////////////////////////
+/////////////////////////////////////////////////
 
 var two_sum = function (array) {
   var pairs = [];
@@ -49,7 +49,7 @@ var two_sum = function (array) {
 var output = two_sum([1,2,4,3,-5,-4,-3,2,1,-1,-1,-1])
 console.log(output)
 
-////////////////////////////////////////
+////////////////////////////////////////////////
 
 var my_transpose = function (array) {
   var new_array = [];
@@ -63,7 +63,7 @@ var my_transpose = function (array) {
   return new_array;
 };
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////
 
 Array.prototype.myEach = function(func) {
   for(var i = 0; i < this.length; i++){
@@ -105,4 +105,28 @@ var mapAdd2 = function (num) {
   return (num + 2);
 };
 
-/////////////////////////////////////
+//////////////////////////////////////////////////////
+
+Array.prototype.bubbleSort  = function () {
+  var sorted = false;
+
+  while (!sorted) {
+    sorted = true;
+
+    for (var idx = 0; idx < this.length; idx++) {
+      if (idx === this.length - 1) {
+        continue;
+      }
+
+      var el = this[idx];
+      if ( el > this[idx + 1] ) {
+        sorted = false;
+
+        this[idx] = this[idx + 1];
+        this[idx + 1] = el;
+      }
+    }
+  }
+
+  return this;
+};
