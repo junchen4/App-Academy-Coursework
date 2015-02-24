@@ -8,7 +8,6 @@
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100%;
-  z-index: 1;
 }
 
 .content-header > h1 {
@@ -32,4 +31,8 @@
   border: 1px solid #000;
   border-radius: 5px;
   font-weight: 700;
+}
+
+.content-header > button:hover {
+  background: #eee;
 }
