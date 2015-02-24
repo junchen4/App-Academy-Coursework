@@ -19,7 +19,6 @@ body {
 
 .header-logo{
   display: block;
-  padding: 10px 20px;
   color: white;
 
   float: left;
@@ -28,7 +27,13 @@ body {
 }
 
 .header-logo a {
+  display: block;
   font-weight: 700;
+  padding: 10px 20px;
+}
+
+.header-logo a:hover {
+  background: #000;
 }
 
 
@@ -48,5 +53,8 @@ body {
   border-left: 1px solid #eee;
   display: block;
   padding: 10px 20px;
+}
 
+.header-list li a:hover {
+  background: #000;
 }
