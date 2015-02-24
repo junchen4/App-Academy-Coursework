@@ -39,7 +39,7 @@
   border-top: 1px solid #ccc;
 }
 
-.header-dropdown > hover:li {
+.header-dropdown > li:hover {
   background: #eee;
 }
 
@@ -48,6 +48,6 @@
   color: #000;
   font-size: 14px;
   font-weight: 400;
-  margin: 10px 20px;
+  padding: 10px 20px;
   display: block;
 }
