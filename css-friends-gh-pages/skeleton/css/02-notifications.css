@@ -39,6 +39,10 @@
   border-top: 1px solid #ccc;
 }
 
+.header-dropdown > hover:li {
+  background: #eee;
+}
+
 .header-dropdown li a{
   white-space: pre;
   color: #000;
