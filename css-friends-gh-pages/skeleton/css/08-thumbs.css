@@ -1,25 +1,25 @@
 /* PHASE 8: Thumbs */
+.profile-friends > li {
+  float: left;
+  width: 60px;
+  margin: 0 0 10px 0;
+}
+
 .thumb {
   display: block;
-}
-
-.thumb > ul > li {
-  display: block;
   position: relative;
-  border: 1px solid #000;
-  border-radius: 5px;
-  float: left;
   width: 58px;
   height: 58px;
-  margin-bottom: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
 }
 
-.thumb > ul li:nth-child(3n+2) {
+.profile-friends > li:nth-child(3n+2) {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.thumb a:hover:before {
+.thumb:hover:before {
   display: block;
   position: absolute;
   top: -30px;
@@ -33,7 +33,7 @@
   transform: translateX(-50%);
 }
 
-.thumb a:hover:after {
+.thumb:hover:after {
   content: "";
   display: block;
   position: absolute;
