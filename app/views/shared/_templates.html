@@ -29,12 +29,12 @@
 
 <script type="text/template" id="toy-list-item-template">
 
-
+<li class="toys" data-toy-id="<%%= toy.id %>">
   <%% var shortInfo = ['name', 'happiness', 'price']; %>
   <%% shortInfo.forEach(function (attr) { %>
     <%%= attr + ': ' + toy.get(attr) %>
   <%% }); %>
-
+</li>
 
 
 </script>
@@ -53,7 +53,7 @@
 
   <select data-pokemon-id='<%%= toy.get("pokemon_id") %>' data-toy-id="<%%= toy.id %>">
 
-  <%% pokes.each(function (pokemon) { %>
+  <%% pokes.forEach(function (pokemon) { %>
     <option value=<%%= pokemon.id %>
     <%% if (pokemon.id == toy.get("pokemon_id")) { %>
       selected="true"
