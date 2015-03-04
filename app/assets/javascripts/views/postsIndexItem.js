@@ -1,20 +1,27 @@
-var PostIndex = JournalApp.Views.PostIndex = Backbone.View.extend({
+var PostIndexItem = JournalApp.Views.PostIndexItem = Backbone.View.extend({
 
   //el and $el: defaults to div
-  tagName: "section", //$el will have tag of tagName instead of div if given
+  tagName: "li", //$el will have tag of tagName instead of div if given
 
-  className: "posts-index", //$el will have class of className if given
+  className: "posts-index-item", //$el will have class of className if given
 
-  events: {},
+  events: {
+    'click li.delete-post': 'destroy'
+  },
 
   initialize: function(options){
-    this.listenTo(this.collection, 'remove', this.render.bind(this));
     //this.collection and this.model if included in options are auto assigned
     //new JournalApp.Views.PostIndex({collection: //})
     //this.collection = options.collection
   },
 
-  template: JST["postIndex"],
+  destroy: function(event){
+    // event.preventDefault();
+
+    this.model.destroy;
+  },
+
+  template: JST["postIndexItem"],
   //view name = "SomethingIndex"
   //view filename = somethingIndex.js is in assets/views
   //template filename = somethingIndex.jst.ejs is in assets/templates
@@ -23,24 +30,19 @@ var PostIndex = JournalApp.Views.PostIndex = Backbone.View.extend({
 
   //template = JST["somethingIndex"] = function(){}
 
-  render: function() {
-    var $ul = $(this.template());
+  render: function(){
+    var currentPost = this.template({post: this.model});
     //allPosts.append("blah"); allPosts is just an HTML string. NO JQUERY METHODS
 
-    this.collection.each(function (post) {
-      var postView = new PostIndexItem({model: post});
-      $ul.append(postView.render().$el);
-    });
-
-    this.$el.html($ul);
-
-    // this.$el.html(allPosts); //$el is a JQuery object
+    this.$el.html(currentPost); //$el is a JQuery object
     //$el.append("blah") puts this at the end of $el, $el.html("blah") replaces everything in $el
 
 
     // this.$el.html("blah"); this replaces everything in $el
-    $("body").append(this.$el);
-    // return this;
+    //$(".posts").append(this.$el); //.posts is class name of <ul>
+    return this;
+    //var view = new PostIndexItem
+    //view.render().$el
   }
 
 });
