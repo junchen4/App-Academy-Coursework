@@ -1,0 +1,5 @@
+<ul class="posts">
+  <% posts.each( function(post){ %>
+    <li data-id="<%= post.id %>"><%= post.escape("title") %></li>
+  <% }); %>
+</ul>
