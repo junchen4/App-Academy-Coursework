@@ -30,6 +30,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    render json: @post #sends back JSON response so server doesn't shit itself
   end
 
   def post_params

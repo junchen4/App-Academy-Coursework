@@ -6,7 +6,7 @@ var PostIndexItem = JournalApp.Views.PostIndexItem = Backbone.View.extend({
   className: "posts-index-item", //$el will have class of className if given
 
   events: {
-    'click li.delete-post': 'destroy'
+    'click button.delete-post': 'destroy'
   },
 
   initialize: function(options){
@@ -15,10 +15,10 @@ var PostIndexItem = JournalApp.Views.PostIndexItem = Backbone.View.extend({
     //this.collection = options.collection
   },
 
-  destroy: function(event){
+  destroy: function(){
     // event.preventDefault();
-
-    this.model.destroy;
+    console.log("clicked");
+    this.model.destroy();
   },
 
   template: JST["postIndexItem"],

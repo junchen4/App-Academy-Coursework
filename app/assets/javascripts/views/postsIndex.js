@@ -8,7 +8,7 @@ var PostIndex = JournalApp.Views.PostIndex = Backbone.View.extend({
   events: {},
 
   initialize: function(options){
-    this.listenTo(this.collection, 'remove', this.render.bind(this));
+    this.listenTo(this.collection, 'remove', this.render);
     //this.collection and this.model if included in options are auto assigned
     //new JournalApp.Views.PostIndex({collection: //})
     //this.collection = options.collection
