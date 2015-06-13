@@ -1,0 +1,19 @@
+<h1><%= @post.title %> </h1>
+
+URL: <%= @post.url %>
+<br>
+<br>
+
+Content
+<br>
+<%= @post.content %>
+<br>
+<br>
+
+Author: <%= User.find(@post.author_id).user_name %>
+<br>
+<br>
+
+<% if current_user_id == @post.author_id %>
+<a href="<%=edit_post_url(@post)%>"> Edit Post </a>
+<% end %>

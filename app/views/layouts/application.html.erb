@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RedditClone</title>
+  <%= csrf_meta_tags %>
+</head>
+<div>
+<%= @user.errors.full_messages unless @user.nil? || @user.errors.full_messages.empty? %><br>
+<%= @sub.errors.full_messages unless @sub.nil? || @sub.errors.full_messages.empty? %><br>
+<%= @post.errors.full_messages unless @post.nil? || @post.errors.full_messages.empty? %><br>
+
+</div>
+<body>
+
+<%= yield %>
+<br>
+<br>
+</body>
+<footer>
+  <a href="<%= subs_url %>">View Subs</a>
+  <br>
+  <br>
+  <% if logged_in? %>
+    <form action="<%= session_url %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="
+
+    </div>">
+      <button>Logout</button>
+    </form>
+  <%else %>
+    <a href='<%= new_session_url %>'> Sign In</a> || <a href='<%= new_user_url %>'> Sign Up</a>
+  <% end %>
+</footer>
+</html>

@@ -1,0 +1,25 @@
+
+u1 = User.create!(user_name: "user1", password: 'password')
+u2 = User.create!(user_name: "user2", password: 'password')
+u3 = User.create!(user_name: "user3", password: 'password')
+
+s1 = Sub.create!(title: "Sub1", description: "User1's sub.", mod_id: 1)
+s2 = Sub.create!(title: "Sub2", description: "User2's sub.", mod_id: 2)
+s3 = Sub.create!(title: "Sub3", description: "User3's sub.", mod_id: 3)
+s4 = Sub.create!(title: "Sub4", description: "Also user3's sub.", mod_id: 3)
+
+p1 = Post.create!(title: "Post1", url: "post1url", content: "Post1 content.",  author_id: 3)
+p2 = Post.create!(title: "Post2", url: "post2url", content: "Post2 content.", author_id: 2)
+p3 = Post.create!(title: "Post3", url: "post3url", content: "Post3 content.",  author_id: 1)
+p4 = Post.create!(title: "Post4", url: "post4url", content: "Post4 content.",  author_id: 3)
+p5 = Post.create!(title: "Post5", url: "post5url", content: "Post5 content.", author_id: 2)
+p6 = Post.create!(title: "Post6", url: "post6url", content: "Post6 content.", author_id: 1)
+
+ps1 = PostSub.create!(sub_id: 1, post_id: 1)
+ps2 = PostSub.create!(sub_id: 2, post_id: 2)
+ps3 = PostSub.create!(sub_id: 3, post_id: 3)
+ps4 = PostSub.create!(sub_id: 4, post_id: 4)
+ps5 = PostSub.create!(sub_id: 4, post_id: 5)
+ps6 = PostSub.create!(sub_id: 3, post_id: 6)
+ps7 = PostSub.create!(sub_id: 2, post_id: 3)
+ps8 = PostSub.create!(sub_id: 1, post_id: 4)
