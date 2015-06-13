@@ -1,0 +1,17 @@
+<h1> <%= @album.name %>'s Album Page </h1>
+
+
+<ul>
+  <% @album.tracks.each do |track| %>
+    <li> <a href="<%=track_url(track)%>"> <%=track.name%> </a> </li>
+  <% end %>
+</ul>
+
+<a href="<%=edit_album_url(@album)%>"> Edit this album </a>
+<br>
+<a href="<%=band_url(@album.band)%>"> Go back to <%=@album.band.name%> </a>
+
+<form action="<%=album_url(@album)%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button>Delete this album</button>
+</form>

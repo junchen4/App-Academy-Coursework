@@ -1,0 +1,13 @@
+<h1> Create an Album for <%=@band.name%> </h1>
+
+<form action="<%=albums_url%>" method="post">
+  Album name:
+  <input type="text" name="album[name]" value="">
+  <br>
+  Live or studio:
+  <input type="text" name="album[live_or_studio]" value="">
+  <% fail %>
+
+  <br>
+  <button> Submit </button>
+</form>

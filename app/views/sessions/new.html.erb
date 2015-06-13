@@ -1,0 +1,22 @@
+<h1> Login Page </h1>
+
+<ul>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <li> <%= error %> </li>
+    <% end %>
+  <% end %>
+</ul>
+
+
+<form id="" action="<%= sessions_url%>" method="post">
+
+  <label for="email"> Email </label>
+  <input id="email" type="text" name="user[email]" value="">
+  <br>
+  <label for="password"> Password </label>
+  <input id="password" type="text" name="user[password]" value="">
+  <br>
+  <input type="Submit">
+
+</form>

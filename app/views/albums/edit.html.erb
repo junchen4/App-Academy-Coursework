@@ -1,0 +1,13 @@
+<h1> Edit <%=@album.name%> </h1>
+
+<form action="<%=album_url(@album)%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  Edit album name:
+  <input type="text" name="album[name]" value="">
+  <br>
+  Edit live or studio:
+  <input type="text" name="album[live_or_studio]" value="">
+  <br>
+  <button> Submit your changes </button>
+</form>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MusicApp</title>
+</head>
+<body>
+
+<%= yield %>
+
+
+<% if !logged_in? %>
+  <form action="<%= new_session_url %>" method="post">
+            <input type="hidden" name="_method" value="get">
+            <button> Sign in here </button>
+  </form>
+
+<% else %>
+  <form action="<%= session_url(current_user) %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button> Sign out here </button>
+  </form>
+
+<% end %>
+
+</body>
+</html>
