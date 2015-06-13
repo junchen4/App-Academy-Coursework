@@ -1,0 +1,12 @@
+<h1> My Goals </h1>
+
+<% current_user.goals.each do |goal|  %>
+  <%=link_to goal.body, goal_url(goal) %>
+  <br>
+<% end %>
+
+<h2> Others' Public Goals </h2>
+<% all_public_goals.each do |goal| %>
+  <%= link_to goal.body, goal_url(goal) %>
+  <br>
+<% end %>

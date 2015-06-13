@@ -1,0 +1,24 @@
+<h1> Edit Goal </h1>
+
+<form action="<%=goal_url(@goal)%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= auth_token %>
+
+  <label>goal
+    <input type="text" name="goal[body]" value="<%=@goal.body%>">
+  </label>
+
+  <br>
+
+  <label>Public
+  <input type="radio" name="goal[public]" value="true" <%='checked' if @goal.public%> >
+  </label>
+
+  <br>
+
+  <label>Private
+  <input type="radio" name="goal[public]" value="false" <%='checked' if !@goal.public%> >
+  </label>
+
+  <button>Update Goal</button>
+</form>
