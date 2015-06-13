@@ -1,0 +1,3 @@
+dir -exclude NewsReader,C
+heckers,Polls, 99cats,Minesweeper,Chess,Poker,SQL_day1,ContactsAPI,MusicApp,Redd
+itClone | %{git mv $_.Name RedditClone}
